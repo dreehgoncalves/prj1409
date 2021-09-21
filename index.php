@@ -5,24 +5,27 @@
   <meta charset="utf-8">
   <title>Aula 14/09</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="estilo.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 
 <body>
-  <div style="text-align:center;">
+  <div class="container">
     <form action="" method="POST" enctype="multipart/form-data">
-      <p>Nome
-        <input type="text" id="nome">
-      </p>
-      <p>E-mail
-        <input type="text" id="email">
-      </p>
-      <p>Motivo
-        <input type="text" id="motivo">
-      </p>
-      <textarea id="mensagem">Mensagem</textarea><br>
-      <button type="button" class="btn btn-primary" onclick="enviar()">Enviar</button>
+      <label for="nome">Nome:</label><br>
+      <input type="text" id="nome" class="form-control" placeholder="Seu nome" required="" autofocus=""><br>
+
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" class="form-control" placeholder="Seu email" required="" autofocus=""><br>
+
+      <label for="motivo">Motivo:</label><br>
+      <input type="text" id="motivo" class="form-control" placeholder="Motivo" required="" autofocus=""><br>
+
+      <label for="mensagem">Mensagem:</label><br>
+      <textarea id="mensagem" class="form-control"></textarea><br>
+
+      <button type="button" class="btn btn-lg btn-primary btn-block" onclick="enviar()">Enviar</button>
     </form>
   </div>
 
@@ -35,8 +38,16 @@
       motivo = document.getElementById("motivo").value;
       mensagem = document.getElementById("mensagem").value;
 
-      axios.post("cadastrar.php",
-                  {nome: "nome"});
+      $.post("cadastrar.php", {
+          nome: nome,
+          email: email,
+          motivo: motivo,
+          mensagem: mensagem
+        },
+        function(data) {
+          window.alert(data),
+            location.reload();
+        })
     }
   </script>
 </body>
