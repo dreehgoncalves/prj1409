@@ -45,9 +45,14 @@
           mensagem: mensagem
         },
         function(data) {
-          window.alert(data),
+          if (data.resp == false) {
+            window.alert(`Ocorreu um erro:"${data.msg}`);
+          } else {
+            window.alert(data.msg);
             location.reload();
-        })
+          }
+        },
+          "JSON")
     }
   </script>
 </body>

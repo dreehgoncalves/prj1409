@@ -1,30 +1,35 @@
 <?php
 
 include("conexao.php");
-extract($_POST);
 
 try {
   if ($_POST) {
+    extract($_POST);
 
-    $sql = "INSERT INTO contato (nome, email, motivo, mensagem) values ('$nome', '$email', '$motivo', '$mensagem')";
+    $pos = strpos($email, '@');
+    if ($pos == false) {
+      throw new Exception("Email inválido");
+    }
 
+    $sql = "INSERT INTO contato (nome, email, motivo, mensagem)
+            values ('$nome', '$email', '$motivo', '$mensagem')";
     $res = mysqli_query($con, $sql);
     $retorno = array();
 
     if ($res == false) {
-
-      $retorno['resp'] = true;
-      $retorno['msg'] = "Erro ao inserir usuário";
+      throw new Exception("Erro ao inserir");  
 
     } else {
-
       $retorno['resp'] = true;
-      $retorno['msg'] = "Usuário inserido com sucesso";
-
+      $retorno['msg'] = "erro ao inserir";
     }
   }
   die(json_encode($retorno));
 } catch (Exception $e) {
-  echo "Erro";
+
+  $retorno = array();
+  $retorno['resp'] = false;
+  $retorno['msg'] = $e->getMessage();
+  die(json_encode($retorno));
 }
 ?>
