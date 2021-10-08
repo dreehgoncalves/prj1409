@@ -129,7 +129,10 @@
           <input type="text" id="telefone" class="form-control" placeholder="telefone" required="" autofocus=""><br>
 
           <label for="email">Email</label><br>
-          <input type="text" id="email" class="form-control" placeholder="UF" required="" autofocus=""><br>
+          <input type="text" id="email" class="form-control" placeholder="Email" required="" autofocus=""><br>
+
+          <label for="cap_social">Capital Social</label><br>
+          <input type="text" id="cap_social" class="form-control" placeholder="Capital Social" required="" autofocus=""><br>
 
           <button type="button" class="btn btn-lg btn-primary btn-block" onclick="enviar()">Enviar</button><br>
         </form>
@@ -211,7 +214,8 @@
                   document.getElementById("numero").value = data.numero;
                   document.getElementById("nome_empresarial").value = data.nome;
                   document.getElementById("nome_fantasia").value = data.fantasia;
-                  $("#numero").focus();
+                  document.getElementById("cap_social").value = data.capital_social;
+                  $("nome_empresarial").focus();
                 }
               },
               "json");
